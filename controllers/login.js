@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const redis = require("redis");
 const client = require("../redis");
 
 dotenv.config();
@@ -21,7 +20,7 @@ async function checkUser(email) {
 
 async function AuthenticateUser(email, password) {
   try {
-    const userChec = await User.findOne({ email: email });
+    const userCheck = await User.findOne({ email: email });
     const validPassword = await bcrypt.compare(password, userCheck.password);
     console.log(validPassword);
     if (validPassword) {
