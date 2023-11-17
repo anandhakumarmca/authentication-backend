@@ -29,8 +29,9 @@ async function InsertVerifyUser(name,email,password){
         <p>Team</p>`
 
         await newUser.save();
+        console.log("after newUser save");
         sendMail(email,"VerifyUser",content)
-
+        console.log("after sendMail");
     }catch(e){
         console.log(error);
     }
