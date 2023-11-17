@@ -1,24 +1,21 @@
 const express = require("express");
-const {AuthorizeUser} = require("../controllers/login");
+const { AuthorizeUser } = require("../controllers/login");
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  try {
+    const auth_token = req.headers.authorization;
+    const loginCredentials = await AuthorizeUser(auth_token);
 
-router.get("/",async(req,res)=>{
-    try{
-        const auth_token = await req.headers.authorization
-        const loginCredentials=AuthorizeUser(auth_token)
-        if(loginCredentials === false){
-            res.status(200).send("Invalid Token")
-        }else{
-            res.json(loginCredentials);
-        }
-    }catch(e){
-        console.log(e);
-        res.status(400).send("Server Busy");
-    }    
-})
+    if (loginCredentials === false) {
+      res.status(401).send("Invalid Token");
+    } else {
+      res.json(loginCredentials);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Busy");
+  }
+});
 
-
-
-
-module.exports=router;
+module.exports = router;
