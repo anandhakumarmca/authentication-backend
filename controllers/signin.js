@@ -18,7 +18,7 @@ async function InsertVerifyUser(name,email,password){
             email:email,
             password:hashedPassword,
             token:token
-        })
+        });
         console.log("inside InsertVerifyUser :", newUser);
         const activationLink = `https://auth-be-u82g.onrender.com/signin/${token}`
         const content = `<h4>Hi, there </h4>
