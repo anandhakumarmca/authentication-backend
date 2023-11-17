@@ -27,6 +27,7 @@ router.post("/verify", async (req, res) => {
     const { name, email, password } = await req.body;
     console.log(name, password, email);
     const registerCredentials = await checkUser(email);
+    console.log(registerCredentials);
     if (registerCredentials === false) {
       await InsertVerifyUser(name, email, password);
       res.status(200).send(true);
